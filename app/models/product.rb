@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
-  validates :name, presence: true  # 商品名を必須項目に
-  validates :price, presence: true # 価格を必須項目に
+  has_many :orders
+
+  validates :name, presence: true, uniqueness: true  # 商品名は必須で一意
+  validates :price, presence: true                   # 価格は必須
 end

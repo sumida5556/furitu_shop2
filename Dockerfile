@@ -1,9 +1,10 @@
+
 # syntax=docker/dockerfile:1
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t furitu_shop2 .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name furitu_shop2 furitu_shop2
+# docker build -t fruit_shop .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name fruit_shop fruit_shop
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 

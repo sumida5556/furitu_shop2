@@ -4,27 +4,11 @@
   <p>商品名: <%= @product.name %></p>
   <p>説明: <%= @product.description %></p>
   <p>価格: <%= @product.price %>円</p>
-</div>
-index.html.erbに詳細へのリンクを作成します。
-
-<!-- app/views/products/index.html.erb -->
-
-  <h1>商品一覧</h1>
-
-  <%= link_to "新規登録", products_new_path %>
-
-  <% @products.each do |product| %>
-    <div>
-      <p>商品名: <%= @product.name %></p>
-      <p>説明: <%= @product.description %></p>
-      <p>価格: <%= @product.price %>円</p>
-    </div>
-
-    <%= link_to "編集", edit_product_path(@product) %>
-
-    <br>
-
-    <%= link_to '削除', destroy_product_path(@product),  data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
-    <hr>
-
+  
+  <% if current_user.admin_flg == true %>
+      <%= link_to "編集", edit_product_path(@product) %>
+      <%= link_to '削除', product_path(@product),  data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+    <% else %>
+      <%= link_to '注文する', new_order_path(product_id:@product.id) %>
   <% end %>
+</div>
