@@ -1,17 +1,26 @@
-
 <h1>商品一覧</h1>
+
 <% if current_user.admin_flg == true %>
   <%= link_to "新規登録", new_product_path %>
 <% end %>
 
 <% @products.each do |product| %>
   <div>
+    <% if product.photo.attached? %>
+      <%= image_tag product.thumbnail %>
+    <% end %>
     <p>商品名: <%= product.name %></p>
     <p>説明: <%= product.description %></p>
     <p>価格: <%= product.price %> 円</p>
     <%= link_to "詳細", product_path(product.id) %>
+
+    <!-- カート追加フォーム -->
+    <%= form_with url: cart_items_path, method: :post, local: true do |f| %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.number_field :quantity, value: 1, min: 1 %>
+      <%= f.submit "カートに追加" %>
+    <% end %>
   </div>
 
   <hr>
-
 <% end %>
