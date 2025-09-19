@@ -1,4 +1,4 @@
-class CartItemsController < ApplicationController             
+class CartItemsController < ApplicationController               
   def create
     # ユーザーのカートを取得
     cart = current_user.cart

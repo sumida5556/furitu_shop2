@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  get "carts/show"
+  get "carts/index"
   devise_for :users
   root to: "homes#top"
   resources :products
   resources :mypage, only: [:show]
-
    # 注文入力・注文作成
   resources :orders, only: [:index, :new, :create] do 
     collection do
@@ -25,7 +26,6 @@ Rails.application.routes.draw do
       post :update_quantity  # カート内商品個数変更
     end
   end
-  # ユーザーのカート内の商品操作
   resources :cart_items, only: [:create, :update, :destroy] 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

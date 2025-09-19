@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   
   # 商品詳細ページ（products#show）を見た場合のみ、セッションに商品IDを記録する
   before_action :store_recent_product
-  
-  # ユーザがログインしている場合、セッションのカート情報をDBのカートにマージする
   before_action :prepare_cart, if: :user_signed_in?
 
    # ログイン後の遷移先を設定
@@ -43,8 +41,7 @@ class ApplicationController < ActionController::Base
       session[:recent_product_ids] = session[:recent_product_ids].take(5)  # 配列の先頭5件だけを残す（＝最大5件まで表示）
     end
   end
-  
-  # セッションのカート情報をユーザごとのDBカートにマージするメソッド
+
   def prepare_cart
      # セッションにカートがマージ済みであるか、または管理者ユーザの場合は何もしない
     return if session[:cart_merged] || current_user.admin_flg?
